@@ -73,7 +73,8 @@ nelmio_cors:
         allow_headers: ["content-type", "authorization"]
         max_age:       3600
     paths:
-        '^/': ~
+        '^/':
+            allow_origin:  ["%cors_allow_origin%"]
 
 # Nelmio API Doc
 nelmio_api_doc:
