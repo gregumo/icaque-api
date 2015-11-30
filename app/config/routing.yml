@@ -1,3 +1,8 @@
+acme_user:
+    resource: "@AcmeUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 app_bundle_app:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /api/

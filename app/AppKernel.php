@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle(),
 
             new AppBundle\AppBundle(),
+            new Acme\UserBundle\AcmeUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'])) {
