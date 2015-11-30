@@ -2,6 +2,7 @@
 /var/bootstrap.php.cache
 /var/cache/*
 /app/config/parameters.yml
+/app/var
 /var/logs/*
 /build/
 /web/build/

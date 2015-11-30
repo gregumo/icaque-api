@@ -11,6 +11,7 @@ parameters:
 
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
+    mailer_port: 587
     mailer_user:       ~
     mailer_password:   ~
 
@@ -23,3 +24,8 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    jwt_private_key_path: '%kernel.root_dir%/var/jwt/private.pem'
+    jwt_public_key_path: '%kernel.root_dir%/var/jwt/public.pem'
+    jwt_key_pass_phrase: ThisTokenIsNotSoSecretChangeIt
+    jwt_token_ttl: 86400
