@@ -1,0 +1,5 @@
+AppBundle\Entity\Product\Vegetable:
+    vegetable_{1..100}:
+        name (unique): <vegetableName()>
+        description: <sentence()>
+        image: <imageLink(80, 80, "food")>

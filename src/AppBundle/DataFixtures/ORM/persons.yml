@@ -1,0 +1,26 @@
+AppBundle\Entity\User\Admin:
+    admin_1:
+        gender: 50%? male : female
+        name (unique): <name($gender)>
+        description: <sentence()>
+        avatar: <imageLink(80, 80, "people")>
+        birthDate: <dateTimeBetween('-20 years', '-12 years')>
+        description: <sentence()>
+
+AppBundle\Entity\User\Farmer:
+    farmer_{1..10}:
+        gender: 50%? male : female
+        name (unique): <name($gender)>
+        description: <sentence()>
+        avatar: <imageLink(80, 80, "people")>
+        birthDate: <dateTimeBetween('-20 years', '-12 years')>
+        description: <sentence()>
+
+AppBundle\Entity\User\Customer:
+    farmer_{1..50}:
+        gender: 50%? male : female
+        name (unique): <name($gender)>
+        description: <sentence()>
+        avatar: <imageLink(80, 80, "people")>
+        birthDate: <dateTimeBetween('-20 years', '-12 years')>
+        description: <sentence()>
