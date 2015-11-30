@@ -11,19 +11,34 @@ services:
 # Examples of API resource mapping, learn more at
 # https://github.com/dunglas/DunglasApiBundle
 
-    resource.person:
+    resource.customer:
         parent:    "api.resource"
-        arguments: [ "AppBundle\\Entity\\Person" ]
+        arguments: [ "AppBundle\\Entity\\User\\Customer" ]
+        tags:      [ { name: "api.resource" } ]
+
+    resource.admin:
+        parent:    "api.resource"
+        arguments: [ "AppBundle\\Entity\\User\\Admin" ]
+        tags:      [ { name: "api.resource" } ]
+
+    resource.farmer:
+        parent:    "api.resource"
+        arguments: [ "AppBundle\\Entity\\User\\Farmer" ]
+        tags:      [ { name: "api.resource" } ]
+
+    resource.basket:
+        parent:    "api.resource"
+        arguments: [ "AppBundle\\Entity\\Basket" ]
         tags:      [ { name: "api.resource" } ]
 
     resource.fruit:
         parent:    "api.resource"
-        arguments: [ "AppBundle\\Entity\\Fruit" ]
+        arguments: [ "AppBundle\\Entity\\Product\\Fruit" ]
         tags:      [ { name: "api.resource" } ]
 
     resource.vegetable:
         parent:    "api.resource"
-        arguments: [ "AppBundle\\Entity\\Vegetable" ]
+        arguments: [ "AppBundle\\Entity\\Product\\Vegetable" ]
         tags:      [ { name: "api.resource" } ]
 
     resource.organization.filter:
