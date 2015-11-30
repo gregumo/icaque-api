@@ -40,7 +40,6 @@ class FoodBasket
      */
     private $stock;
 
-
     /**
      * @return int
      */
