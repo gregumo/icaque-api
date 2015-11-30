@@ -28,11 +28,12 @@ class RegistrationController extends BaseController
             $user = $form->getData();
 
             if ($confirmationEnabled) {
-                $data = []; // TODO: data ?
+                $data = null;
                 $code = 200;
             } else {
                 $data = [
                     'token' => $this->container->get("lexik_jwt_authentication.jwt_manager")->create($user),
+                    // TODO HYPERMEDIA
                 ];
                 $code = 201;
             }
