@@ -12,35 +12,23 @@ annotationGenerators:
 namespaces:
   entity: AppBundle\Entity
 types:
-  CreativeWork:
-    parent: false
-    properties:
-      name: ~
-      description: ~
-      author:
-        range:       Person
-        cardinality: (*..*)
-      publisher: ~
-      genre: ~
-      datePublished: ~
-  Book:
-    properties:
-      illustrator:
-        cardinality: (*..*)
-      isbn: ~
-      numberOfPages: ~
   Person:
     parent: false
+    doctrine:
+      inheritanceMapping: "@MappedSuperclass"
+    abstract: true
     properties:
       name: ~
       description: ~
       url: ~
       birthDate: ~
       gender: ~
-  Organization:
+  Product:
     parent: false
+    doctrine:
+      inheritanceMapping: "@MappedSuperclass"
+    abstract: true
     properties:
       name: ~
       description: ~
-      url: ~
-
+      image: ~

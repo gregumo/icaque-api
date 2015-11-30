@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity;
+namespace AppBundle\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
@@ -8,25 +8,25 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * A person (alive, dead, undead, or fictional).
- * 
+ *
  * @see http://schema.org/Person Documentation on Schema.org
- * 
- * @ORM\Entity
+ *
+ * @ORM\MappedSuperclass
  * @Iri("http://schema.org/Person")
  */
 class Person
 {
     /**
      * @var int
-     * 
-     * @ORM\Column(type="integer")
+     *
+     * @ORM\Column(type="guid")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
     /**
      * @var \DateTime Date of birth.
-     * 
+     *
      * @ORM\Column(type="date", nullable=true)
      * @Assert\Date
      * @Iri("https://schema.org/birthDate")
@@ -34,7 +34,7 @@ class Person
     private $birthDate;
     /**
      * @var string A short description of the item.
-     * 
+     *
      * @ORM\Column(nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/description")
@@ -42,7 +42,7 @@ class Person
     private $description;
     /**
      * @var string Gender of the person.
-     * 
+     *
      * @ORM\Column(nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/gender")
@@ -50,26 +50,25 @@ class Person
     private $gender;
     /**
      * @var string The name of the item.
-     * 
+     *
      * @ORM\Column(nullable=true)
      * @Assert\Type(type="string")
      * @Iri("https://schema.org/name")
      */
     private $name;
     /**
-     * @var string URL of the item.
-     * 
+     * @var string The avatar.
+     *
      * @ORM\Column(nullable=true)
-     * @Assert\Url
-     * @Iri("https://schema.org/url")
+     * @Assert\Type(type="string")
      */
-    private $url;
+    private $avatar;
 
     /**
      * Sets id.
-     * 
+     *
      * @param int $id
-     * 
+     *
      * @return $this
      */
     public function setId($id)
@@ -81,7 +80,7 @@ class Person
 
     /**
      * Gets id.
-     * 
+     *
      * @return int
      */
     public function getId()
@@ -91,9 +90,9 @@ class Person
 
     /**
      * Sets birthDate.
-     * 
+     *
      * @param \DateTime $birthDate
-     * 
+     *
      * @return $this
      */
     public function setBirthDate(\DateTime $birthDate = null)
@@ -105,7 +104,7 @@ class Person
 
     /**
      * Gets birthDate.
-     * 
+     *
      * @return \DateTime
      */
     public function getBirthDate()
@@ -115,9 +114,9 @@ class Person
 
     /**
      * Sets description.
-     * 
+     *
      * @param string $description
-     * 
+     *
      * @return $this
      */
     public function setDescription($description)
@@ -129,7 +128,7 @@ class Person
 
     /**
      * Gets description.
-     * 
+     *
      * @return string
      */
     public function getDescription()
@@ -139,9 +138,9 @@ class Person
 
     /**
      * Sets gender.
-     * 
+     *
      * @param string $gender
-     * 
+     *
      * @return $this
      */
     public function setGender($gender)
@@ -153,7 +152,7 @@ class Person
 
     /**
      * Gets gender.
-     * 
+     *
      * @return string
      */
     public function getGender()
@@ -163,9 +162,9 @@ class Person
 
     /**
      * Sets name.
-     * 
+     *
      * @param string $name
-     * 
+     *
      * @return $this
      */
     public function setName($name)
@@ -177,7 +176,7 @@ class Person
 
     /**
      * Gets name.
-     * 
+     *
      * @return string
      */
     public function getName()
@@ -186,26 +185,24 @@ class Person
     }
 
     /**
-     * Sets url.
-     * 
-     * @param string $url
-     * 
-     * @return $this
+     * Gets avatar.
+     *
+     * @return string
      */
-    public function setUrl($url)
+    public function getAvatar()
     {
-        $this->url = $url;
-
-        return $this;
+        return $this->avatar;
     }
 
     /**
-     * Gets url.
-     * 
-     * @return string
+     * Sets avatar.
+     *
+     * @param string $avatar
+     *
+     * @return $this
      */
-    public function getUrl()
+    public function setAvatar($avatar)
     {
-        return $this->url;
+        $this->avatar = $avatar;
     }
 }
