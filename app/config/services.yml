@@ -5,23 +5,25 @@ parameters:
 
 services:
 
+    faker.provider.foo:
+        class: AppBundle\DataFixtures\Faker\Provider\FooProvider
+        tags: [ { name: hautelook_alice.faker.provider } ]
 # Examples of API resource mapping, learn more at
 # https://github.com/dunglas/DunglasApiBundle
-    resource.book:
-        parent:    "api.resource"
-        arguments: [ "AppBundle\\Entity\\Book" ]
-        tags:      [ { name: "api.resource" } ]
 
     resource.person:
         parent:    "api.resource"
         arguments: [ "AppBundle\\Entity\\Person" ]
         tags:      [ { name: "api.resource" } ]
 
-    resource.organization:
+    resource.fruit:
         parent:    "api.resource"
-        arguments: [ "AppBundle\\Entity\\Organization" ]
-        calls:
-            -      [ "initFilters", [ [ "@resource.organization.filter" ] ] ]
+        arguments: [ "AppBundle\\Entity\\Fruit" ]
+        tags:      [ { name: "api.resource" } ]
+
+    resource.vegetable:
+        parent:    "api.resource"
+        arguments: [ "AppBundle\\Entity\\Vegetable" ]
         tags:      [ { name: "api.resource" } ]
 
     resource.organization.filter:

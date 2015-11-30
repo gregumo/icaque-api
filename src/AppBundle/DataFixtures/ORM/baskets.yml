@@ -1,0 +1,45 @@
+AppBundle\Entity\Basket:
+    basket_1:
+        name (unique): Petit panier de légumes
+        image: <imageLink(80, 80, "food")>
+    basket_2:
+        name (unique): Moyen panier de légumes
+        image: <imageLink(80, 80, "food")>
+    basket_3:
+        name (unique): Grand panier de légumes
+        image: <imageLink(80, 80, "food")>
+    basket_4:
+        name (unique): Petit panier de fruits
+        image: <imageLink(80, 80, "food")>
+    basket_5:
+        name (unique): Moyen panier de fruits
+        image: <imageLink(80, 80, "food")>
+    basket_6:
+        name (unique): Grand panier de fruits
+        image: <imageLink(80, 80, "food")>
+
+AppBundle\Entity\FoodBasket:
+    food_basket_{1..10}:
+        food: @vegetable_<numberBetween(1, 100)>
+        basket: @basket_1
+        stock: <numberBetween(1, 10)>
+    food_basket_{11..20}:
+        food: @vegetable_<numberBetween(1, 100)>
+        basket: @basket_2
+        stock: <numberBetween(1, 10)>
+    food_basket_{21..30}:
+        food: @vegetable_<numberBetween(1, 100)>
+        basket: @basket_3
+        stock: <numberBetween(1, 10)>
+    food_basket_{31..40}:
+        food: @fruit_<numberBetween(1, 100)>
+        basket: @basket_4
+        stock: <numberBetween(1, 10)>
+    food_basket_{41..50}:
+        food: @fruit_<numberBetween(1, 100)>
+        basket: @basket_5
+        stock: <numberBetween(1, 10)>
+    food_basket_{51..60}:
+        food: @fruit_<numberBetween(1, 100)>
+        basket: @basket_6
+        stock: <numberBetween(1, 10)>
