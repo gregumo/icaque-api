@@ -47,4 +47,32 @@ class RegistrationController extends BaseController
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
+
+    /**
+    * Receive the confirmation token from user email provider, login the user
+    */
+    public function confirmAction($token)
+    {
+        $response = new Response();
+        $user = $this->container->get('fos_user.user_manager')->findUserByConfirmationToken($token);
+
+        if (null === $user) {
+            throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
+        }
+
+        $user->setConfirmationToken(null);
+        $user->setEnabled(true);
+        $user->setLastLogin(new \DateTime());
+
+        $this->container->get('fos_user.user_manager')->updateUser($user);
+        $data = [
+            'token' => $this->container->get("lexik_jwt_authentication.jwt_manager")->create($user),
+            // TODO HYPERMEDIA
+        ];
+        $code = 201;
+        $response->setContent(json_encode($data));
+        $response->setStatusCode($code);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
 }
