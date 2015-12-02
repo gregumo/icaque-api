@@ -3,6 +3,7 @@
 /var/cache/*
 /app/config/parameters.yml
 /app/var
+/var/jwt
 /var/logs/*
 /build/
 /web/build/
