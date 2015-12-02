@@ -15,3 +15,8 @@ services:
                     resetting: %fos_user.resetting.email.from_email%
         calls:
             - [setRequest, [@request_stack]]
+
+    acme.user.authentication.handler.logout_success_handler:
+        class:  Acme\UserBundle\Handler\LogoutSuccessHandler
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }

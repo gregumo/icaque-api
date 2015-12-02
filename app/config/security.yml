@@ -42,6 +42,9 @@ security:
                     name:    bearer
                 throw_exceptions:        false
                 create_entry_point:      true
+            logout:
+                path: /logout
+                success_handler: acme.user.authentication.handler.logout_success_handler
 
         default:
             anonymous: ~
