@@ -52,6 +52,7 @@ security:
             anonymous: ~
 
     access_control:
-        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login,    roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/,      roles: [IS_AUTHENTICATED_FULLY]}
-        - { path: ^/,      roles: [ROLE_ADMIN],      methods: [POST, PUT, DELETE]}
+        - { path: ^/,         roles: [ROLE_ADMIN],      methods: [POST, PUT, DELETE]}
