@@ -5,16 +5,30 @@ namespace AppBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
+use FOS\UserBundle\Entity\User as BaseUser;
+
 
 /**
  * A person (alive, dead, undead, or fictional).
  *
  * @see http://schema.org/Person Documentation on Schema.org
  *
- * @ORM\MappedSuperclass
  * @Iri("http://schema.org/Person")
+ *
+ * @ORM\Entity
+ * @ORM\Table("user")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", length=15, type="string")
+ * @ORM\DiscriminatorMap(
+ *     {
+ *     "admin"="AppBundle\Entity\User\Admin",
+ *     "customer"="AppBundle\Entity\User\Customer",
+ *     "farmer"="AppBundle\Entity\User\Farmer",
+ *     "user"="AppBundle\Entity\User\User"
+ *     }
+ * )
  */
-class Person
+class User extends BaseUser
 {
     /**
      * @var int
@@ -23,7 +37,7 @@ class Person
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
      */
-    private $id;
+    protected $id;
     /**
      * @var \DateTime Date of birth.
      *
@@ -63,6 +77,11 @@ class Person
      * @Assert\Type(type="string")
      */
     private $avatar;
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Sets id.

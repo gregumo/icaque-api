@@ -6,10 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Admin
- *
- * @ORM\Table()
- * @ORM\Entity
+ * @ORM\Entity()
  */
-class Admin extends Person
+class Admin extends User
 {
 }
