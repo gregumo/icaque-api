@@ -3,7 +3,9 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_CUSTOMER:    ROLE_USER
+        ROLE_FARMER:      ROLE_CUSTOMER
+        ROLE_ADMIN:       ROLE_FARMER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
@@ -52,3 +54,4 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 #        - { path: ^/,      roles: [IS_AUTHENTICATED_FULLY]}
+        - { path: ^/,      roles: [ROLE_ADMIN],      methods: [POST, PUT, DELETE]}
