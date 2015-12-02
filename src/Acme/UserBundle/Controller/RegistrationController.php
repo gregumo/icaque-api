@@ -9,6 +9,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
 use FOS\UserBundle\Model\UserInterface;
+use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
  * Class RegistrationController
@@ -16,7 +19,31 @@ use FOS\UserBundle\Model\UserInterface;
  */
 class RegistrationController extends BaseController
 {
-    public function registerAction() {
+
+    /**
+     * Register a new user.
+     *
+     * @ApiDoc(
+     *  section = "User",
+     *  description = "Register a new user.",
+     *  statusCodes = {
+     *      200 = "User registered and wait for confirmation",
+     *      201 = "User registered without confirmation",
+     *      400 = "Invalid data received."
+     *  },
+     *  parameters = {
+     *      { "name" = "fos_user_registration_form[username]", "dataType" = "string", "required" = true, "description" = "Username of the user to register." },
+     *      { "name" = "fos_user_registration_form[email]", "dataType" = "string", "required" = true, "description" = "Email of the user to register." },
+     *      { "name" = "fos_user_registration_form[plainPassword][first]", "dataType" = "string", "required" = true, "description" = "Password of the user to register." },
+     *      { "name" = "fos_user_registration_form[plainPassword][second]", "dataType" = "string", "required" = true, "description" = "Confirm password of the user to register." },
+     *      { "name" = "callback", "dataType" = "string", "required" = true, "description" = "Url for the confirmation link to send in the confirmation mail." }
+     *  }
+     * )
+     * @Method("POST")
+     * @Route("register")
+     */
+    public function registerAction()
+    {
         $response = new Response();
 
         $form = $this->container->get('fos_user.registration.form');
@@ -73,6 +100,7 @@ class RegistrationController extends BaseController
         $response->setContent(json_encode($data));
         $response->setStatusCode($code);
         $response->headers->set('Content-Type', 'application/json');
+
         return $response;
     }
 }
