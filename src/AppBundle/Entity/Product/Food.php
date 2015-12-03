@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\Product;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -11,8 +12,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/Product Documentation on Schema.org
  *
- * @ORM\MappedSuperclass
  * @Iri("http://schema.org/Product")
+ *
+ * @ORM\Entity
+ * @ORM\Table("Food")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", length=15, type="string")
+ * @ORM\DiscriminatorMap(
+ *     {
+ *     "fruit"="AppBundle\Entity\Product\Fruit",
+ *     "vegetable"="AppBundle\Entity\Product\Vegetable",
+ *     }
+ * )
  */
 abstract class Food
 {
@@ -50,20 +61,34 @@ abstract class Food
     private $name;
 
     /**
-     * @return mixed
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\FoodBasket", mappedBy="food")
      */
+    private $baskets;
+
+    public function __construct()
+    {
+        $this->baskets = new ArrayCollection();
+    }
+
+    public function addBasket(\AppBundle\Entity\FoodBasket $foodBasket)
+    {
+        $this->baskets[] = $foodBasket;
+
+        return $this;
+    }
+
+    public function removeBasket(\AppBundle\Entity\FoodBasket $foodBasket)
+    {
+        $this->baskets->removeElement($foodBasket);
+    }
+
     public function getBaskets()
     {
         return $this->baskets;
     }
 
-    /**
-     * @param mixed $baskets
-     */
-    public function setBaskets($baskets)
-    {
-        $this->baskets = $baskets;
-    }
     /**
      * Sets id.
      *

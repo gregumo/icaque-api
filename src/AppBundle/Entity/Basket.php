@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -32,7 +33,7 @@ class Basket
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FoodBasket", mappedBy="basket")
+     * @ORM\OneToMany(targetEntity="FoodBasket", mappedBy="basket")
      */
     private $foods;
 
@@ -44,6 +45,28 @@ class Basket
      * @Iri("https://schema.org/image")
      */
     private $image;
+
+    public function __construct()
+    {
+        $this->foods = new ArrayCollection();
+    }
+
+    public function addFood(FoodBasket $foodBasket)
+    {
+        $this->foods[] = $foodBasket;
+
+        return $this;
+    }
+
+    public function removeFood(FoodBasket $foodBasket)
+    {
+        $this->foods->removeElement($foodBasket);
+    }
+
+    public function getFoods()
+    {
+        return $this->foods;
+    }
 
     /**
      * @return string
@@ -59,21 +82,6 @@ class Basket
     public function setImage($image)
     {
         $this->image = $image;
-    }
-    /**
-     * @return mixed
-     */
-    public function getFoods()
-    {
-        return $this->foods;
-    }
-
-    /**
-     * @param mixed $foods
-     */
-    public function setFoods($foods)
-    {
-        $this->foods = $foods;
     }
 
     /**

@@ -31,6 +31,26 @@ services:
         arguments: [ "AppBundle\\Entity\\Basket" ]
         tags:      [ { name: "api.resource" } ]
 
+    resource.foodBasket:
+        parent:    "api.resource"
+        arguments: [ "AppBundle\\Entity\\FoodBasket" ]
+        tags:      [ { name: "api.resource" } ]
+        calls:
+            -   method: "initFilters"
+                arguments:
+                    -
+                        - "@resource.food_basket.filter"
+
+    resource.food:
+        parent:    "api.resource"
+        arguments: [ "AppBundle\\Entity\\Product\\Food" ]
+        tags:      [ { name: "api.resource" } ]
+        calls:
+            -   method: "initFilters"
+                arguments:
+                    -
+                        - "@resource.food.filter"
+
     resource.fruit:
         parent:    "api.resource"
         arguments: [ "AppBundle\\Entity\\Product\\Fruit" ]
@@ -41,9 +61,17 @@ services:
         arguments: [ "AppBundle\\Entity\\Product\\Vegetable" ]
         tags:      [ { name: "api.resource" } ]
 
-    resource.organization.filter:
+    resource.food_basket.filter:
         parent:    "api.doctrine.orm.search_filter"
-        arguments: [ { "name": "exact", "url": "partial" } ]
+        arguments:
+            -   basket: exact
+                food: exact
+
+    resource.food.filter:
+        parent:    "api.doctrine.orm.search_filter"
+        arguments:
+            -   baskets: exact
+                name: partial
 
 # A typical service
 #    service_name:
