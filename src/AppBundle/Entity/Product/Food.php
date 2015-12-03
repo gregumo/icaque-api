@@ -11,8 +11,18 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @see http://schema.org/Product Documentation on Schema.org
  *
- * @ORM\MappedSuperclass
  * @Iri("http://schema.org/Product")
+ *
+ * @ORM\Entity
+ * @ORM\Table("Food")
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", length=15, type="string")
+ * @ORM\DiscriminatorMap(
+ *     {
+ *     "fruit"="AppBundle\Entity\Product\Fruit",
+ *     "vegetable"="AppBundle\Entity\Product\Vegetable",
+ *     }
+ * )
  */
 abstract class Food
 {
@@ -49,21 +59,6 @@ abstract class Food
      */
     private $name;
 
-    /**
-     * @return mixed
-     */
-    public function getBaskets()
-    {
-        return $this->baskets;
-    }
-
-    /**
-     * @param mixed $baskets
-     */
-    public function setBaskets($baskets)
-    {
-        $this->baskets = $baskets;
-    }
     /**
      * Sets id.
      *
