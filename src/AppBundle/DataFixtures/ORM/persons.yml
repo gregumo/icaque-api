@@ -6,6 +6,14 @@ AppBundle\Entity\User\Admin:
         avatar: <imageLink(80, 80, "people")>
         birthDate: <dateTimeBetween('-20 years', '-12 years')>
         description: <sentence()>
+        username: gregoire@appventus.com
+        email: gregoire@appventus.com
+        plainPassword: test
+        enabled: true
+        locked: false
+        expired: false
+        roles:
+            - ROLE_ADMIN
 
 AppBundle\Entity\User\Farmer:
     farmer_{1..10}:
@@ -15,6 +23,14 @@ AppBundle\Entity\User\Farmer:
         avatar: <imageLink(80, 80, "people")>
         birthDate: <dateTimeBetween('-20 years', '-12 years')>
         description: <sentence()>
+        username: <email()>
+        email: <email()>
+        plainPassword: test
+        enabled: true
+        locked: false
+        expired: false
+        roles:
+            - ROLE_FARMER
 
 AppBundle\Entity\User\Customer:
     farmer_{1..50}:
@@ -24,3 +40,11 @@ AppBundle\Entity\User\Customer:
         avatar: <imageLink(80, 80, "people")>
         birthDate: <dateTimeBetween('-20 years', '-12 years')>
         description: <sentence()>
+        username: <email()>
+        email: <email()>
+        plainPassword: test
+        enabled: true
+        locked: false
+        expired: false
+        roles:
+            - ROLE_CUSTOMER
