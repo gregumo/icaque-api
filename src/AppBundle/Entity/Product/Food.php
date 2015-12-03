@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity\Product;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -58,6 +59,35 @@ abstract class Food
      * @Iri("https://schema.org/name")
      */
     private $name;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="\AppBundle\Entity\FoodBasket", mappedBy="food")
+     */
+    private $baskets;
+
+    public function __construct()
+    {
+        $this->baskets = new ArrayCollection();
+    }
+
+    public function addBasket(\AppBundle\Entity\FoodBasket $foodBasket)
+    {
+        $this->baskets[] = $foodBasket;
+
+        return $this;
+    }
+
+    public function removeBasket(\AppBundle\Entity\FoodBasket $foodBasket)
+    {
+        $this->baskets->removeElement($foodBasket);
+    }
+
+    public function getBaskets()
+    {
+        return $this->baskets;
+    }
 
     /**
      * Sets id.
