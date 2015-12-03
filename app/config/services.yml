@@ -45,6 +45,11 @@ services:
         parent:    "api.resource"
         arguments: [ "AppBundle\\Entity\\Product\\Food" ]
         tags:      [ { name: "api.resource" } ]
+        calls:
+            -   method: "initFilters"
+                arguments:
+                    -
+                        - "@resource.food.filter"
 
     resource.fruit:
         parent:    "api.resource"
@@ -58,7 +63,15 @@ services:
 
     resource.food_basket.filter:
         parent:    "api.doctrine.orm.search_filter"
-        arguments: [ { "basket": "exact" } ]
+        arguments:
+            -   basket: exact
+                food: exact
+
+    resource.food.filter:
+        parent:    "api.doctrine.orm.search_filter"
+        arguments:
+            -   baskets: exact
+                name: partial
 
 # A typical service
 #    service_name:
