@@ -16,6 +16,11 @@ services:
         arguments: [ "AppBundle\\Entity\\User\\Customer" ]
         tags:      [ { name: "api.resource" } ]
 
+    resource.user:
+        parent:    "api.resource"
+        arguments: [ "AppBundle\\Entity\\User\\User" ]
+        tags:      [ { name: "api.resource" } ]
+
     resource.admin:
         parent:    "api.resource"
         arguments: [ "AppBundle\\Entity\\User\\Admin" ]
@@ -30,6 +35,11 @@ services:
         parent:    "api.resource"
         arguments: [ "AppBundle\\Entity\\Basket" ]
         tags:      [ { name: "api.resource" } ]
+        calls:
+            -      method:    "initNormalizationContext"
+                   arguments: [ { groups: [ "basket" ] } ]
+            -      method:    "initDenormalizationContext"
+                   arguments: [ { groups: [ "basket" ] } ]
 
     resource.foodBasket:
         parent:    "api.resource"

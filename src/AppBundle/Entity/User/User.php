@@ -23,12 +23,11 @@ use FOS\UserBundle\Entity\User as BaseUser;
  *     {
  *     "admin"="AppBundle\Entity\User\Admin",
  *     "customer"="AppBundle\Entity\User\Customer",
- *     "farmer"="AppBundle\Entity\User\Farmer",
- *     "user"="AppBundle\Entity\User\User"
+ *     "farmer"="AppBundle\Entity\User\Farmer"
  *     }
  * )
  */
-class User extends BaseUser
+abstract class User extends BaseUser
 {
     /**
      * @var int

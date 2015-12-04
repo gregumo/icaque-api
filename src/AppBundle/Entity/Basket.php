@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * Basket
@@ -27,18 +29,23 @@ class Basket
 
     /**
      * @var string The name of the item.
+     * @Groups({"basket"})
      *
      * @ORM\Column(type="string")
      */
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="FoodBasket", mappedBy="basket")
+     * @var FoodBasket
+     * @Groups({"basket"})
+     *
+     * @ORM\OneToMany(targetEntity="FoodBasket", mappedBy="basket", cascade={"all"})
      */
-    private $foods;
+    private $foodBaskets;
 
     /**
      * @var string An image of the item. This can be a [URL](http://schema.org/URL) or a fully described [ImageObject](http://schema.org/ImageObject).
+     * @Groups({"basket"})
      *
      * @ORM\Column(nullable=true)
      * @Assert\Url
@@ -48,24 +55,26 @@ class Basket
 
     public function __construct()
     {
-        $this->foods = new ArrayCollection();
+        $this->foodBaskets = new ArrayCollection();
     }
 
-    public function addFood(FoodBasket $foodBasket)
+    public function addFoodBasket(FoodBasket $foodBasket)
     {
-        $this->foods[] = $foodBasket;
+        $foodBasket->setBasket($this);
+        $this->foodBaskets[] = $foodBasket;
 
         return $this;
     }
 
-    public function removeFood(FoodBasket $foodBasket)
+    public function removeFoodBasket(FoodBasket $foodBasket)
     {
-        $this->foods->removeElement($foodBasket);
+        $foodBasket->setBasket(null);
+        $this->foodBaskets->removeElement($foodBasket);
     }
 
-    public function getFoods()
+    public function getFoodBaskets()
     {
-        return $this->foods;
+        return $this->foodBaskets;
     }
 
     /**

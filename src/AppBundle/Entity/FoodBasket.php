@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 /**
  * FoodBasket
@@ -22,12 +24,14 @@ class FoodBasket
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Basket", inversedBy="foods")
+     * @Groups({"basket"})
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Basket", inversedBy="foodBaskets")
      * @ORM\JoinColumn(name="basket_id", referencedColumnName="id", nullable=false)
      */
     private $basket;
 
     /**
+     * @Groups({"basket"})
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Product\Food")
      * @ORM\JoinColumn(name="food_id", referencedColumnName="id", nullable=false)
      */
@@ -35,6 +39,7 @@ class FoodBasket
 
     /**
      * @var int
+     * @Groups({"basket"})
      *
      * @ORM\Column(type="integer")
      */
