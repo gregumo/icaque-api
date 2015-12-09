@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Dunglas\ApiBundle\Annotation\Iri;
 use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Entity\User as BaseUser;
-
+use AppBundle\Entity\Basket;
 
 /**
  * A person (alive, dead, undead, or fictional).
@@ -16,7 +16,7 @@ use FOS\UserBundle\Entity\User as BaseUser;
  * @Iri("http://schema.org/Person")
  *
  * @ORM\Entity
- * @ORM\Table("user")
+ * @ORM\Table("User")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", length=15, type="string")
  * @ORM\DiscriminatorMap(
@@ -76,6 +76,12 @@ abstract class User extends BaseUser
      * @Assert\Type(type="string")
      */
     private $avatar;
+
+    /**
+     * @var Basket[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Basket", mappedBy="user", cascade={"persist"})
+     */
+    private $baskets;
 
     public function __construct()
     {
@@ -222,5 +228,21 @@ abstract class User extends BaseUser
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBaskets()
+    {
+        return $this->baskets;
+    }
+
+    /**
+     * @param mixed $baskets
+     */
+    public function setBaskets($baskets)
+    {
+        $this->baskets = $baskets;
     }
 }
