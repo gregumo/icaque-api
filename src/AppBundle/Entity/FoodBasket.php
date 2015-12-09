@@ -24,7 +24,6 @@ class FoodBasket
     private $id;
 
     /**
-     * @Groups({"basket"})
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Basket", inversedBy="foodBaskets")
      * @ORM\JoinColumn(name="basket_id", referencedColumnName="id", nullable=false)
      */
@@ -43,7 +42,7 @@ class FoodBasket
      *
      * @ORM\Column(type="integer")
      */
-    private $stock;
+    private $quantity;
 
     /**
      * @return int
@@ -96,17 +95,17 @@ class FoodBasket
     /**
      * @return int
      */
-    public function getStock()
+    public function getQuantity()
     {
-        return $this->stock;
+        return $this->quantity;
     }
 
     /**
-     * @param int $stock
+     * @param int $quantity
      */
-    public function setStock($stock)
+    public function setQuantity($quantity)
     {
-        $this->stock = $stock;
+        $this->quantity = $quantity;
     }
 
 }
