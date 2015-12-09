@@ -53,6 +53,12 @@ class Basket
      */
     private $image;
 
+    /**
+     * @var User\User
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User\User", inversedBy="basket")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->foodBaskets = new ArrayCollection();
@@ -123,6 +129,26 @@ class Basket
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @return User\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User\User $user
+     *
+     * @return $this
+     */
+    public function setUser(User\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
 }
