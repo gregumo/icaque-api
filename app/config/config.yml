@@ -70,14 +70,14 @@ dunglas_api:
 # Nelmio CORS
 nelmio_cors:
     defaults:
-        allow_origin:  ["%cors_allow_origin%"]
+        allow_origin:  %cors_allow_origin%
         allow_methods: ["POST", "PUT", "GET", "DELETE", "OPTIONS"]
         allow_headers: ["content-type", "authorization"]
         allow_credentials: true
         max_age:       3600
     paths:
         '^/':
-            allow_origin:  ["%cors_allow_origin%"]
+            allow_origin: %cors_allow_origin%
 
 # Nelmio API Doc
 nelmio_api_doc:
